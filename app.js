@@ -12,7 +12,43 @@ client.once('ready', () => {
     console.log('Ready!!')
 })
 
+client.on('guildMemberAdd', member => {
+    const channel = member.guild.channels.find(ch => ch.name === 'introductions')
+    if (!channel) return
+    channel.send(`Welcome to the server, ${member} || LEAVE B4 ITS 2 L8 ||`)
+})
+
 client.on('message', message => {
+    // DED GAME
+    if (message.content.includes('overwatch') || message.content.includes('ow')) {
+        const msgArr = message.content.split(' ')
+        if (msgArr.includes('overwatch') || msgArr.includes('ow')) {
+            message.channel.send('DED GAME OMEGALUL')
+        }
+    }
+
+    // F OFF
+    if (message.isMentioned(client.user)) {
+        message.channel.send('FK OFF!')
+    }
+
+    // SILV SUCCS
+    if (message.content.includes('silv') || message.content.includes('SILV')) {
+        message.channel.send('Silv succs! || <3 ||')
+    }
+
+    // NO U
+    if (message.content.includes('fuck u')) {
+        message.channel.send('NO U!')
+    }
+
+    // POG
+    if (message.content.includes('pog') || message.content.includes('POG')) {
+        message.channel.send('', {
+            files: ["https://discordemoji.com/assets/emoji/PogChamp.png"]
+        })
+    }
+
     // OW STATS
     if (message.content.startsWith(`${prefix}ow`) || message.content.startsWith(`${prefix}OW`)) {
         const msgArr = message.content.split(' ')
@@ -192,6 +228,8 @@ client.on('message', message => {
                         }
                     }
                 })
+            }).catch(e => {
+                message.channel.send('Animal not found.')
             })
     }
 
@@ -201,7 +239,7 @@ client.on('message', message => {
     }
 
     // CYA
-    if (message.content.startsWith(`cya`)) {
+    if (message.content.includes(`cya`)) {
         message.channel.send('CYA!')
     }
 
