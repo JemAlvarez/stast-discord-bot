@@ -175,7 +175,7 @@ client.on('message', message => {
             .then(fact => {
                 message.channel.send({
                     embed: {
-                        color: 9164998,
+                        color: 16735776,
                         author: {
                             name: client.user.username,
                             icon_url: client.user.avatarURL
