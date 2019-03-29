@@ -8,6 +8,7 @@ const apexUrl = 'https://public-api.tracker.gg/apex/v1/standard/profile'
 const flex = 'Blue still better than u XD'
 
 client.once('ready', () => {
+    client.user.setActivity('YOU', { type: 'WATCHING' });
     console.log('Ready!!')
 })
 
