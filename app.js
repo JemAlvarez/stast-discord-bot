@@ -13,7 +13,7 @@ client.once('ready', () => {
 
 client.on('message', message => {
     // OW STATS
-    if (message.content.startsWith(`${prefix}ow`)) {
+    if (message.content.startsWith(`${prefix}ow`) || message.content.startsWith(`${prefix}OW`)) {
         const msgArr = message.content.split(' ')
 
         const args = {
@@ -29,6 +29,27 @@ client.on('message', message => {
         fetch(`${owUrl}/${args.platform}/${args.region}/${args.name}/profile`)
             .then(res => res.json())
             .then(data => {
+                if (data.private) {
+                    return message.channel.send({
+                        embed: {
+                            color: 16423965,
+                            author: {
+                                name: client.user.username,
+                                icon_url: client.user.avatarURL
+                            },
+                            title: data.name,
+                            fields: [{
+                                name: 'Private',
+                                value: 'Account is private'
+                            }],
+                            footer: {
+                                icon_url: client.user.avatarURL,
+                                text: flex
+                            }
+                        }
+                    })
+                }
+
                 message.channel.send({
                     embed: {
                         color: 16423965,
@@ -58,7 +79,7 @@ client.on('message', message => {
     }
 
     // APEX
-    if (message.content.startsWith(`${prefix}apex`)) {
+    if (message.content.startsWith(`${prefix}apex`) || message.content.startsWith(`${prefix}APEX`)) {
         const msgArr = message.content.split(' ')
 
         const args = {
@@ -111,13 +132,80 @@ client.on('message', message => {
             })
     }
 
+    // ADVICE
+    if (message.content.startsWith(`${prefix}advice`) || message.content.startsWith(`${prefix}ADVICE`)) {
+        fetch('https://api.adviceslip.com/advice')
+            .then(res => res.json())
+            .then(data => {
+                const advice = data.slip.advice
+
+                message.channel.send({
+                    embed: {
+                        color: 9164998,
+                        author: {
+                            name: client.user.username,
+                            icon_url: client.user.avatarURL
+                        },
+                        title: ':)',
+                        fields: [{
+                            name: 'Advice',
+                            value: advice
+                        }],
+                        footer: {
+                            icon_url: client.user.avatarURL,
+                            text: flex
+                        }
+                    }
+                })
+            })
+    }
+
+    // ANIMAL FACTS
+    if (message.content.startsWith(`${prefix}fact`) || message.content.startsWith(`${prefix}FACT`)) {
+        const msgArr = message.content.split(' ')
+
+        let animal = ''
+
+        if (msgArr[1]) {
+            animal = `?animal_type=${msgArr[1]}`
+        }
+
+        fetch(`https://cat-fact.herokuapp.com/facts/random${animal}`)
+            .then(res => res.json())
+            .then(fact => {
+                message.channel.send({
+                    embed: {
+                        color: 9164998,
+                        author: {
+                            name: client.user.username,
+                            icon_url: client.user.avatarURL
+                        },
+                        title: fact.type.toUpperCase(),
+                        fields: [{
+                            name: 'Fun fact',
+                            value: fact.text
+                        }],
+                        footer: {
+                            icon_url: client.user.avatarURL,
+                            text: flex
+                        }
+                    }
+                })
+            })
+    }
+
     // BRUV
     if (message.content.startsWith(`bruv`) || message.content.startsWith(`BRUV`)) {
         message.channel.send('Bruv!')
     }
 
+    // CYA
+    if (message.content.startsWith(`cya`)) {
+        message.channel.send('CYA!')
+    }
+
     // HELP
-    if (message.content.startsWith(`${prefix}help`)) {
+    if (message.content.startsWith(`${prefix}help`) || message.content.startsWith(`${prefix}HELP`)) {
         message.channel.send({
             embed: {
                 color: 3447003,
@@ -129,12 +217,18 @@ client.on('message', message => {
                 description: "Commands you can use",
                 fields: [{
                     name: "Overwatch",
-                    value: "**!ow :platform :region :name#number** (name is case sensitive)"
+                    value: "**!ow :platform :region :name#number** \n Regions: us, eu, asia \n (name is case sensitive)"
                 },
                 {
                     name: "Apex",
                     value: "**!apex :platform :name**"
-                },],
+                }, {
+                    name: "Advice",
+                    value: "**!advice**"
+                }, {
+                    name: "Animal Facts",
+                    value: "**!fact :animal** \n (if no animal is provided the default is cat)"
+                }],
                 footer: {
                     icon_url: client.user.avatarURL,
                     text: flex
