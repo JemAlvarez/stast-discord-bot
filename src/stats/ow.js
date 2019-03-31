@@ -37,6 +37,21 @@ const ow = (message, client) => {
                     })
                 }
 
+                if (data.error) {
+                    return message.channel.send({
+                        embed: msgEmbed({
+                            client,
+                            flex,
+                            color: 16423965,
+                            title: data.name,
+                            fields: [{
+                                name: 'Not found',
+                                value: 'User not found. Try agani.'
+                            }]
+                        })
+                    })
+                }
+
                 message.channel.send({
                     embed: msgEmbed({
                         client,
