@@ -40,7 +40,7 @@ client.on('message', message => {
     dedGame(message)
     pog(message)
     noU(message)
-    fOff(message)
+    fOff(message, client)
     silvSuccs(message)
     bruv(message)
     cya(message)
