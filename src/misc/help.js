@@ -25,6 +25,9 @@ const help = (message, client) => {
                 }, {
                     name: "Animal Facts",
                     value: "**!fact :animal** \n (if no animal is provided the default is cat)"
+                }, {
+                    name: "Truth or Dare",
+                    value: "**!tod** \n (wait for response and say 'truth' or 'dare')"
                 }]
             })
         })

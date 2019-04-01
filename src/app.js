@@ -17,6 +17,7 @@ const apex = require('./stats/apex')
 const advice = require('./misc/advice')
 const animal = require('./misc/animal')
 const help = require('./misc/help')
+const tod = require('./misc/tod')
 
 // config
 const client = new Discord.Client()
@@ -53,6 +54,7 @@ client.on('message', message => {
     advice(message, client)
     animal(message, client)
     help(message, client)
+    tod(message)
 })
 
 // login
