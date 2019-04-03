@@ -1,4 +1,4 @@
-const msgEmbed = ({ client, color, title, fields, flex }) => {
+const msgEmbed = ({ client, color, title, fields, flex }, other) => {
     return {
         color: color,
         author: {
@@ -7,6 +7,7 @@ const msgEmbed = ({ client, color, title, fields, flex }) => {
         },
         title,
         fields,
+        ...other,
         footer: {
             icon_url: client.user.avatarURL,
             text: flex

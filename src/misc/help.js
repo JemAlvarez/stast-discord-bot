@@ -20,6 +20,9 @@ const help = (message, client) => {
                     name: "Apex",
                     value: "**!apex :platform :name**"
                 }, {
+                    name: "League of Legends",
+                    value: "**!lol :summonerName**"
+                }, {
                     name: "Advice",
                     value: "**!advice**"
                 }, {

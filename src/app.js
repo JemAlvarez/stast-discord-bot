@@ -12,6 +12,7 @@ const cya = require('./hidden/cya')
 // stats
 const ow = require('./stats/ow')
 const apex = require('./stats/apex')
+const league = require('./stats/league')
 
 // misc
 const advice = require('./misc/advice')
@@ -49,6 +50,7 @@ client.on('message', message => {
     // Stats
     ow(message, client)
     apex(message, client)
+    league(message, client, Discord)
 
     // Misc
     advice(message, client)

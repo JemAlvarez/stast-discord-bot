@@ -35,7 +35,6 @@ const apex = (message, client) => {
             }
         }).then(res => res.json())
             .then(data => {
-                console.log(data)
                 if (data.errors) {
                     return message.channel.send({
                         embed: msgEmbed({
