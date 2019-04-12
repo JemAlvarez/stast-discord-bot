@@ -133,7 +133,7 @@ const league = (message, client, discord) => {
                         ]
                     }, {
                             thumbnail: {
-                                url: `${iconUrl}/${data.name}.png`
+                                url: `${iconUrl}/${data.name.toLowerCase()}.png`
                             }
                         })
                 })
